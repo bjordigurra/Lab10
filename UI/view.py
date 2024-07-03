@@ -15,6 +15,8 @@ class View(ft.UserControl):
         self._title = None
 
         self._txt_result = None
+        self._ddStati = None
+        self._btnStatiRaggiungibili = None
 
     def load_interface(self):
         # title
@@ -26,10 +28,18 @@ class View(ft.UserControl):
         self._btnCalcola = ft.ElevatedButton(text="Calcola Confini", on_click=self._controller.handleCalcola)
         row1 = ft.Row([self._txtAnno, self._btnCalcola], alignment=ft.MainAxisAlignment.CENTER)
         self._page.controls.append(row1)
+
+        # Row 2
+        self._ddStati = ft.Dropdown(label="Stato", on_change=self._controller.leggi_stato)
+
+        self._btnStatiRaggiungibili = ft.ElevatedButton(text="Stati raggiungibili", on_click=self._controller.handleStatiRaggiungibili)
+        row2 = ft.Row([self._ddStati, self._btnStatiRaggiungibili], alignment=ft.MainAxisAlignment.CENTER)
+        self._page.controls.append(row2)
         # List View where the reply is printed
         self._txt_result = ft.ListView(expand=1, spacing=10, padding=20, auto_scroll=False)
         self._page.controls.append(self._txt_result)
         self._page.update()
+
 
     @property
     def controller(self):
